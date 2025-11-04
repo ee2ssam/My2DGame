@@ -31,6 +31,10 @@ namespace MyBird
         //이동
         [SerializeField]
         private float moveSpeed = 5f;                   //이동 속도
+
+        //버드 UI
+        public GameObject readyUI;
+        public GameObject gameoverUI;
         #endregion
 
         #region Unity Event Method
@@ -85,12 +89,12 @@ namespace MyBird
             if(collision.gameObject.tag == "Pipe")
             {
                 //Debug.Log("기둥과 충돌");
-                GameManager.IsDeath = true;
+                GameOver();
             }
             else if (collision.gameObject.tag == "Ground")
             {
                 //Debug.Log("그라운드와 충돌");
-                GameManager.IsDeath = true;
+                GameOver();
             }
         }
 
@@ -101,12 +105,19 @@ namespace MyBird
             if(collision.gameObject.tag == "Point")
             {
                 GameManager.Score++;
-                Debug.Log($"점수: {GameManager.Score}");
+                //Debug.Log($"점수: {GameManager.Score}");
             }
         }
         #endregion
 
         #region Custom Method
+        //게임 오버 처리
+        void GameOver()
+        {
+            GameManager.IsDeath = true;
+            gameoverUI.SetActive(true);
+        }
+
         //입력 처리
         void InputBird()
         {
@@ -122,6 +133,9 @@ namespace MyBird
             if (GameManager.IsStart == false && keyJump == true)
             {
                 GameManager.IsStart = true;
+
+                //UI
+                readyUI.SetActive(false);
             }
         }
 
