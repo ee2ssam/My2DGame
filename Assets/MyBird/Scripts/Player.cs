@@ -77,12 +77,42 @@ namespace MyBird
             }
             
         }
+
+        //충돌 체크 - 매개변수로 부딪힌 충돌체를 입력 받는다
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            //충돌한 충돌체 체크
+            if(collision.gameObject.tag == "Pipe")
+            {
+                //Debug.Log("기둥과 충돌");
+                GameManager.IsDeath = true;
+            }
+            else if (collision.gameObject.tag == "Ground")
+            {
+                //Debug.Log("그라운드와 충돌");
+                GameManager.IsDeath = true;
+            }
+        }
+
+        //매개변수로 부딪힌 충돌체를 입력 받는다
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            //충돌한 충돌체 체크
+            if(collision.gameObject.tag == "Point")
+            {
+                GameManager.Score++;
+                Debug.Log($"점수: {GameManager.Score}");
+            }
+        }
         #endregion
 
         #region Custom Method
         //입력 처리
         void InputBird()
-        {            
+        {
+            if (GameManager.IsDeath)
+                return;
+
             //스페이스 키 OR 마우스 왼클릭으로 입력받기
             keyJump |= Input.GetKeyDown(KeyCode.Space);
             keyJump |= Input.GetMouseButtonDown(0);
@@ -136,6 +166,9 @@ namespace MyBird
         //버드 이동
         void MoveBird()
         {
+            if (GameManager.IsDeath)
+                return;
+
             transform.Translate(Vector3.right * Time.deltaTime * moveSpeed, Space.World);
         }
         #endregion
