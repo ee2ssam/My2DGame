@@ -52,11 +52,13 @@ namespace MyBird
 
         private void Update()
         {
+#if UNITY_EDITOR
             //치팅 - 저장 데이터 삭제
             if (Input.GetKeyDown(KeyCode.P))
             {
                 PlayerPrefs.DeleteAll();
             }
+#endif
         }
         #endregion
     }

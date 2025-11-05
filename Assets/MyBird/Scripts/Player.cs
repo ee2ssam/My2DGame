@@ -144,10 +144,22 @@ namespace MyBird
             if (GameManager.IsDeath)
                 return;
 
+#if UNITY_EDITOR    //유니티 에디터 마우스와 키보드 입력 처리
             //스페이스 키 OR 마우스 왼클릭으로 입력받기
             keyJump |= Input.GetKeyDown(KeyCode.Space);
             keyJump |= Input.GetMouseButtonDown(0);
+#else   //그외 플랫폼에서 터치 입력 처리
+            if(Input.touchCount > 0)
+            {
+                //첫번째 들어온 터치 가져오기
+                Touch touch = Input.GetTouch(0);
 
+                if(touch.phase == TouchPhase.Began)
+                {
+                    keyJump |= true;
+                }
+            }
+#endif
 
             //플레이어 이동 시작
             if (GameManager.IsStart == false && keyJump == true)
@@ -205,6 +217,6 @@ namespace MyBird
 
             transform.Translate(Vector3.right * Time.deltaTime * moveSpeed, Space.World);
         }
-        #endregion
+#endregion
     }
 }
