@@ -35,6 +35,9 @@ namespace MyBird
         //버드 UI
         public GameObject readyUI;
         public GameObject gameoverUI;
+
+        //사운드
+        private AudioSource audioSource;                //포인트 사운드
         #endregion
 
         #region Unity Event Method
@@ -42,6 +45,7 @@ namespace MyBird
         {
             //참조
             rb2D = this.GetComponent<Rigidbody2D>();
+            audioSource = this.GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -86,12 +90,7 @@ namespace MyBird
         private void OnCollisionEnter2D(Collision2D collision)
         {
             //충돌한 충돌체 체크
-            if(collision.gameObject.tag == "Pipe")
-            {
-                //Debug.Log("기둥과 충돌");
-                GameOver();
-            }
-            else if (collision.gameObject.tag == "Ground")
+            if (collision.gameObject.tag == "Ground")
             {
                 //Debug.Log("그라운드와 충돌");
                 GameOver();
@@ -104,13 +103,34 @@ namespace MyBird
             //충돌한 충돌체 체크
             if(collision.gameObject.tag == "Point")
             {
-                GameManager.Score++;
-                //Debug.Log($"점수: {GameManager.Score}");
+                GetPoint();                
+            }
+            else if (collision.gameObject.tag == "Pipe")
+            {
+                //Debug.Log("기둥과 충돌");
+                GameOver();
             }
         }
         #endregion
 
         #region Custom Method
+        //점수 획득 처리
+        void GetPoint()
+        {
+            GameManager.Score++;
+            
+            //효과: vfx, sfx
+            audioSource.Play();
+
+            //게임 포인트 체크 - 기둥을 10개 통과할때마다
+            if(GameManager.Score%10 == 0)
+            {
+                //레벨링
+                GameManager.spawnValue += 0.05f;
+            }
+        }
+
+
         //게임 오버 처리
         void GameOver()
         {
