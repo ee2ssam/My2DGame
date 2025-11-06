@@ -29,8 +29,8 @@ namespace My2DGame
 
         private void FixedUpdate()
         {
-            //이동
-            rb2D.linearVelocity = new Vector2(inputMove.x * walkSpeed, rb2D.linearVelocity.y);
+            //좌우 이동
+            rb2D.linearVelocity = new Vector2(inputMove.x * walkSpeed, rb2D.linearVelocity.y);            
         }
         #endregion
 
