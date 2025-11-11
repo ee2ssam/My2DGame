@@ -13,6 +13,7 @@ namespace My2DGame
         private Rigidbody2D rb2D;
         private Animator animator;
         private TouchingDirections touchingDirections;
+        private Damageable damageable;
 
         //이동
         [SerializeField] private float walkSpeed = 3f;          //걷는 속도
@@ -113,6 +114,15 @@ namespace My2DGame
                 return animator.GetBool(AnimationString.CannotMove);
             }
         }
+
+        //애니메이터의 파라미터 값(LockVelocity) 읽어오기
+        public bool LockVelocity
+        {
+            get
+            {
+                return animator.GetBool(AnimationString.LockVelocity);
+            }
+        }
         #endregion
 
         #region Unity Event Method
@@ -122,13 +132,19 @@ namespace My2DGame
             rb2D = this.GetComponent<Rigidbody2D>();
             animator = this.GetComponent<Animator>();
             touchingDirections = this.GetComponent<TouchingDirections>();
+            damageable = this.GetComponent<Damageable>();
+
+            //이벤트 함수 등록
+            damageable.hitAction += OnHit;
         }
 
         private void FixedUpdate()
         {
             //좌우 이동
-            rb2D.linearVelocity = new Vector2(inputMove.x * CurrentMoveSpeed, rb2D.linearVelocity.y);
-
+            if(LockVelocity == false)
+            {
+                rb2D.linearVelocity = new Vector2(inputMove.x * CurrentMoveSpeed, rb2D.linearVelocity.y);
+            }
 
             //점프 애니메이션
             animator.SetFloat(AnimationString.YVelocity, rb2D.linearVelocityY);
@@ -139,6 +155,9 @@ namespace My2DGame
         //방향 전환
         void SetFacingDirection(Vector2 moveInput)
         {
+            if (CannotMove)
+                return;
+
             if(moveInput.x > 0f && IsFacingRight == false)    //오른쪽으로 이동
             {
                 IsFacingRight = true;
@@ -189,6 +208,12 @@ namespace My2DGame
             {
                 animator.SetTrigger(AnimationString.AttackTrigger);
             }
+        }
+
+        //데미지 이벤트에 등록되는 함수
+        public void OnHit(float damage, Vector2 knockback)
+        {
+            rb2D.linearVelocity = new Vector2(knockback.x, rb2D.linearVelocityY + knockback.y);
         }
         #endregion
 

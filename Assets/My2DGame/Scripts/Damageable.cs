@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace My2DGame
 {
@@ -26,6 +27,9 @@ namespace My2DGame
         [SerializeField]
         private float invincibleTimer = 3f;
         private float countdown = 0f;
+
+        //데미지 입을때 호출되는 이벤트 함수
+        public UnityAction<float, Vector2> hitAction;
         #endregion
 
         #region Property
@@ -96,7 +100,7 @@ namespace My2DGame
         #endregion
 
         #region Custom Method
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, Vector2 knockback)
         {
             //죽음 체크, 무적 체크
             if (isDeath || isInvincible)
@@ -110,7 +114,9 @@ namespace My2DGame
             //애니메이션
             animator.SetTrigger(AnimationString.HitTrigger);
 
-            //데미지 효과
+            //데미지 효과(knockback)
+            //hitAction 이벤트에 등록된 함수 호출
+            hitAction?.Invoke(damage, knockback);
 
         }
         #endregion
