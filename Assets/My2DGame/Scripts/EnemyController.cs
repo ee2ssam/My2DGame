@@ -14,6 +14,9 @@ namespace My2DGame
         private TouchingDirections touchingDirections;
         private Animator animator;
 
+        //적 감지
+        public DetectionZone detectionZone;
+
         //이동
         //이동 속도
         [SerializeField] private float runSpeed = 4f;   
@@ -29,6 +32,12 @@ namespace My2DGame
 
         //현재 이동 방향
         private WalkableDirection walkDirection = WalkableDirection.Right;
+
+        //감속 Lerp 계수 
+        [SerializeField] private float stopRate = 0.2f;
+
+        //적 감지 - 타겟이 있다
+        private bool hasTarget = false;
         #endregion
 
         #region Property
@@ -57,6 +66,26 @@ namespace My2DGame
                 walkDirection = value;
             }
         }
+
+        //애니메이터의 파라미터 값(CannotMove) 읽어오기
+        public bool CannotMove
+        {
+            get
+            {
+                return animator.GetBool(AnimationString.CannotMove);
+            }
+        }
+
+        //적 감지
+        public bool HasTarget
+        {
+            get { return hasTarget; }
+            set
+            {
+                hasTarget = value;
+                animator.SetBool(AnimationString.HasTarget, value);
+            }
+        }
         #endregion
 
         #region Unity Event Method
@@ -68,6 +97,12 @@ namespace My2DGame
             animator = this.GetComponent<Animator>();
         }
 
+        private void Update()
+        {
+            //적 감지
+            HasTarget = (detectionZone.detectedColliders.Count > 0);
+        }
+
         private void FixedUpdate()
         {
             //벽 체크
@@ -77,7 +112,15 @@ namespace My2DGame
             }
 
             //이동하기
-            rb2D.linearVelocity = new Vector2(directionVector.x * runSpeed, rb2D.linearVelocityY);
+            if(CannotMove)
+            {
+                //감속 rb2D.linearVelocityX -> 0
+                rb2D.linearVelocity = new Vector2(Mathf.Lerp(rb2D.linearVelocityX, 0f, stopRate), rb2D.linearVelocityY);
+            }
+            else
+            {
+                rb2D.linearVelocity = new Vector2(directionVector.x * runSpeed, rb2D.linearVelocityY);
+            }   
         }
         #endregion
 

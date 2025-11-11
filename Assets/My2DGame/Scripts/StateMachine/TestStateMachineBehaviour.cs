@@ -3,7 +3,7 @@ using UnityEngine;
 namespace My2DGame
 {
     /// <summary>
-    /// Animator의 State 또는 SubState에 부착되는 스크립트
+    /// Animator의 State 또는 SubStateMachine에 부착되는 스크립트
     /// StateMachineBehaviour를 상속 받는 클래스
     /// </summary>
     public class TestStateMachineBehaviour : StateMachineBehaviour
