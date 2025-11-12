@@ -7073,7 +7073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffec45945a138c44b34f957aac24809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 15
   knockback: {x: 2, y: 2}
 --- !u!60 &74324320
 PolygonCollider2D:
@@ -18591,6 +18591,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 946585718988666374, guid: cb11e92535ab17d4491def7309153724, type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1831979242994370397, guid: cb11e92535ab17d4491def7309153724, type: 3}
       propertyPath: m_Name
       value: Enemy

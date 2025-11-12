@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace My2DGame
@@ -21,6 +22,18 @@ namespace My2DGame
             //참조
             gameCanvas = FindFirstObjectByType<Canvas>();
         }
+
+        private void OnEnable()
+        {
+            //이벤트 함수 등록
+            CharacterEvents.characterDamaged += CharacterTakeDamage;
+        }
+
+        private void OnDisable()
+        {
+            //이벤트 함수 해제
+            CharacterEvents.characterDamaged -= CharacterTakeDamage;
+        }
         #endregion
 
         #region Custom Method
@@ -29,9 +42,14 @@ namespace My2DGame
         public void CharacterTakeDamage(Transform character, float damageReceived)
         {
             //캐릭터 머리위 위치 가져오기
-            Vector3 spawnPosition = Vector3.zero;
+            Vector3 spawnPosition = Camera.main.WorldToScreenPoint(character.position);
 
-            Instantiate(damageTextPrefab, spawnPosition, Quaternion.identity, gameCanvas.transform);
+            GameObject textGo = Instantiate(damageTextPrefab, new Vector3(spawnPosition.x, spawnPosition.y + 70f, spawnPosition.z),
+                Quaternion.identity, gameCanvas.transform);
+
+            //데미지 값 셋팅
+            TextMeshProUGUI damageText = textGo.GetComponent<TextMeshProUGUI>();
+            damageText.text = damageReceived.ToString();
         }
         #endregion
     }
