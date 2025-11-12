@@ -20,7 +20,8 @@ namespace My2DGame
         #region Unity Event Method
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Damageable damageable = collision.GetComponent<Damageable>();
+            Damageable damageable = collision.GetComponent<Damageable>();            
+
             if (damageable != null)
             {
                 //넉백 효과 방향 설정

@@ -134,7 +134,7 @@ namespace My2DGame
             touchingDirections = this.GetComponent<TouchingDirections>();
             damageable = this.GetComponent<Damageable>();
 
-            //이벤트 함수 등록
+            //Damageable 이벤트 함수 등록
             damageable.hitAction += OnHit;
         }
 
