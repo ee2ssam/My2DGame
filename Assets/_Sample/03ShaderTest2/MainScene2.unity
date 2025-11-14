@@ -8543,6 +8543,7 @@ GameObject:
   - component: {fileID: 1424916364}
   - component: {fileID: 1424916363}
   - component: {fileID: 1424916362}
+  - component: {fileID: 1424916372}
   m_Layer: 7
   m_Name: TestPlayer
   m_TagString: Player
@@ -8898,6 +8899,24 @@ Transform:
   - {fileID: 1056232805}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1424916372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424916361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05614684b680dd64f929e991fb75708c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostMaterial: {fileID: 2100000, guid: 8a4f5d13695208445a97102e67198116, type: 2}
+  trailActiveTime: 2
+  trailRefreshRate: 0.1
+  trailDestroyDelay: 1
+  shaderValueRate: 0.1
+  shaderValueRefeshRate: 0.1
 --- !u!1 &1599470305
 GameObject:
   m_ObjectHideFlags: 0
@@ -19596,7 +19615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1831979242994370397, guid: cb11e92535ab17d4491def7309153724, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4668581216945403599, guid: cb11e92535ab17d4491def7309153724, type: 3}
       propertyPath: m_LocalPosition.x

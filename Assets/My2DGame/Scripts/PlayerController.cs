@@ -14,6 +14,8 @@ namespace My2DGame
         private Animator animator;
         private TouchingDirections touchingDirections;
         private Damageable damageable;
+        //잔상 효과
+        private TrailEffect trailEffect;
 
         //이동
         [SerializeField] private float walkSpeed = 3f;          //걷는 속도
@@ -134,6 +136,8 @@ namespace My2DGame
             touchingDirections = this.GetComponent<TouchingDirections>();
             damageable = this.GetComponent<Damageable>();
 
+            trailEffect = this.GetComponent<TrailEffect>();
+
             //Damageable 이벤트 함수 등록
             damageable.hitAction += OnHit;
         }
@@ -188,6 +192,12 @@ namespace My2DGame
             if(context.started) //버튼을 눌렀을때
             {
                 IsRun = true;
+
+                //잔상 효과 시작
+                if (trailEffect != null)
+                {
+                    trailEffect.StartTrailEffect();
+                }
             }
             else if(context.canceled) //버튼을 뗄때
             {
@@ -203,6 +213,12 @@ namespace My2DGame
                 //Debug.Log("플레이어가 점프 합니다");
                 animator.SetTrigger(AnimationString.JumpTrigger);
                 rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpForce);
+
+                //잔상 효과 시작
+                if(trailEffect != null)
+                {
+                    trailEffect.StartTrailEffect();
+                }
             }
         }
 
