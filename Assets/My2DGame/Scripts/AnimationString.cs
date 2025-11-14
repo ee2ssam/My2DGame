@@ -3,7 +3,7 @@ using UnityEngine;
 namespace My2DGame
 {
     /// <summary>
-    /// ¾Ö´Ï¸ŞÀÌ¼Ç ÆÄ¶ó¹ÌÅÍ ¹®ÀÚ¿­ Á¤ÀÇ Å¬·¡½º
+    /// ì• ë‹ˆë©”ì´ì…˜ íŒŒë¼ë¯¸í„° ë¬¸ìì—´ ì •ì˜ í´ë˜ìŠ¤
     /// </summary>
     public class AnimationString
     {
@@ -19,6 +19,7 @@ namespace My2DGame
         public static string IsDeath = "IsDeath";
         public static string LockVelocity = "LockVelocity";
         public static string CooldownTime = "CooldownTime";
+        public static string BowAttackTrigger = "BowAttackTrigger";
 
     }
 }

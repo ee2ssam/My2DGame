@@ -7280,6 +7280,37 @@ Transform:
   - {fileID: 1705467545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &403902062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 403902063}
+  m_Layer: 7
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &403902063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403902062}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.72, y: -0.16, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 481860536}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &481860532
 GameObject:
   m_ObjectHideFlags: 0
@@ -7297,6 +7328,7 @@ GameObject:
   - component: {fileID: 481860538}
   - component: {fileID: 481860540}
   - component: {fileID: 481860541}
+  - component: {fileID: 481860542}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -7439,6 +7471,7 @@ Transform:
   - {fileID: 74324318}
   - {fileID: 1200257496}
   - {fileID: 186683404}
+  - {fileID: 403902063}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &481860537
@@ -7530,6 +7563,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ca2a73dd-5fb7-42ad-87ec-7a221d6954d3
     m_ActionName: 'Player/Attack[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 481860538}
+        m_TargetAssemblyTypeName: My2DGame.PlayerController, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: de166fde-40b6-41e7-bb17-2d29ec33b058
+    m_ActionName: 'Player/Fire[/Keyboard/f]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -7620,6 +7669,20 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   invincibleTimer: 3
+--- !u!114 &481860542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481860532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef8fb5e0fef041479912b3710229f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 5136379545065443057, guid: ab7bc7c93d028bf4fb43d117a9a4d1bd, type: 3}
+  firePoint: {fileID: 403902063}
 --- !u!1 &580520647
 GameObject:
   m_ObjectHideFlags: 0
@@ -18804,6 +18867,10 @@ PrefabInstance:
     - target: {fileID: 1831979242994370397, guid: cb11e92535ab17d4491def7309153724, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1831979242994370397, guid: cb11e92535ab17d4491def7309153724, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4668581216945403599, guid: cb11e92535ab17d4491def7309153724, type: 3}
       propertyPath: m_LocalPosition.x

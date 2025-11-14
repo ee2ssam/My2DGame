@@ -3,28 +3,28 @@ using UnityEngine;
 namespace My2DGame
 {
     /// <summary>
-    /// HitBox¿¡ Ãæµ¹ÇÑ Àû¿¡°Ô µ¥¹ÌÁö¸¦ ÁÖ´Â Å¬·¡½º
+    /// HitBoxì— ì¶©ëŒí•œ ì ì—ê²Œ ë°ë¯¸ì§€ë¥¼ ì£¼ëŠ” í´ë˜ìŠ¤
     /// </summary>
     public class Attack : MonoBehaviour
     {
         #region Variables
-        //°ø°İ½Ã Àû¿¡°Ô ÁÖ´Â µ¥¹ÌÁö ·®
+        //ê³µê²©ì‹œ ì ì—ê²Œ ì£¼ëŠ” ë°ë¯¸ì§€ ëŸ‰
         [SerializeField]
         private float attackDamage = 10f;
 
-        //°ø°İ½Ã ³Ë¹é È¿°ú
+        //ê³µê²©ì‹œ ë„‰ë°± íš¨ê³¼
         [SerializeField]
         private Vector2 knockback = Vector2.zero;
         #endregion
 
         #region Unity Event Method
-        private void OnTriggerEnter2D(Collider2D collision)
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
             Damageable damageable = collision.GetComponent<Damageable>();            
 
             if (damageable != null)
             {
-                //³Ë¹é È¿°ú ¹æÇâ ¼³Á¤
+                //ë„‰ë°± íš¨ê³¼ ë°©í–¥ ì„¤ì •
                 Vector2 deliveredKnockback = this.transform.parent.localScale.x > 0f ? 
                     knockback : new Vector2(-knockback.x, knockback.y);
 
