@@ -177,4 +177,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   knockback: {x: 1, y: 0}
-  moveSpeed: {x: 5, y: 0}
+  damageEffectPrefab: {fileID: 7810853448501981424, guid: 9151c4a51b5eb0a4dbce645c65fd6756, type: 3}
+  effectOffset: {x: 0.5, y: 0, z: 0}
+  moveSpeed: {x: 10, y: 0}

@@ -25,7 +25,15 @@ namespace My2DGame
 
         private void Start()
         {
-            rb2D.linearVelocity = new Vector2(moveSpeed.x, moveSpeed.y);
+            rb2D.linearVelocity = new Vector2(moveSpeed.x * transform.localScale.x, moveSpeed.y);
+        }
+
+        protected override void OnTriggerEnter2D(Collider2D collision)
+        {
+            base.OnTriggerEnter2D(collision);
+
+            //화살 킬
+            Destroy(this.gameObject);
         }
         #endregion
     }

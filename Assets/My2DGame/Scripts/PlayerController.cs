@@ -15,8 +15,6 @@ namespace My2DGame
         private TouchingDirections touchingDirections;
         private Damageable damageable;
 
-        private ProjectileLauncher projectileLauncher;
-
         //이동
         [SerializeField] private float walkSpeed = 3f;          //걷는 속도
         [SerializeField] private float runSpeed = 6f;           //뛰는 속도
@@ -136,8 +134,6 @@ namespace My2DGame
             touchingDirections = this.GetComponent<TouchingDirections>();
             damageable = this.GetComponent<Damageable>();
 
-            projectileLauncher = this.GetComponent<ProjectileLauncher>();
-
             //Damageable 이벤트 함수 등록
             damageable.hitAction += OnHit;
         }
@@ -159,9 +155,6 @@ namespace My2DGame
         //방향 전환
         void SetFacingDirection(Vector2 moveInput)
         {
-            if (CannotMove)
-                return;
-
             if(moveInput.x > 0f && IsFacingRight == false)    //오른쪽으로 이동
             {
                 IsFacingRight = true;
@@ -176,9 +169,17 @@ namespace My2DGame
         public void OnMove(InputAction.CallbackContext context)
         {
             inputMove = context.ReadValue<Vector2>();
-            IsMove = (inputMove != Vector2.zero);
-            //방향 전환
-            SetFacingDirection(inputMove);
+
+            if(damageable.IsDeath == false)
+            {
+                IsMove = (inputMove != Vector2.zero);
+                //방향 전환
+                SetFacingDirection(inputMove);
+            }
+            else
+            {
+                IsMove = false;
+            }            
         }
 
         //런 입력 처리
@@ -220,9 +221,6 @@ namespace My2DGame
             if (context.started && touchingDirections.IsGround)
             {
                 animator.SetTrigger(AnimationString.BowAttackTrigger);
-
-                //발사체 발사
-                projectileLauncher.FireProjectile();
             }
         }
 
