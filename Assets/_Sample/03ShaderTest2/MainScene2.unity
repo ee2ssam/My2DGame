@@ -8579,7 +8579,7 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   invincibleTimer: 3
-  invincibleMaterial: {fileID: 0}
+  invincibleMaterial: {fileID: 2100000, guid: 1db167e29256e9a469e4ef5e09c03056, type: 2}
 --- !u!114 &1424916364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19596,7 +19596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1831979242994370397, guid: cb11e92535ab17d4491def7309153724, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4668581216945403599, guid: cb11e92535ab17d4491def7309153724, type: 3}
       propertyPath: m_LocalPosition.x

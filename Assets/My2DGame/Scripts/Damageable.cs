@@ -87,10 +87,15 @@ namespace My2DGame
         {
             //초기화
             CurrentHealth = MaxHealth;
+            oringinMaterial = renderer.material;
         }
 
         private void Update()
         {
+            //죽음 체크
+            if (IsDeath)
+                return;
+
             //무적 타이머 - 무적 모드일때
             if (isInvincible)
             {
@@ -99,6 +104,10 @@ namespace My2DGame
                 {
                     //타이머 구현 - 무적모드 해제
                     isInvincible = false;
+                    if (invincibleMaterial != null)
+                    {
+                        renderer.material = oringinMaterial;
+                    }
 
                     //타이머 초기화
                     countdown = 0f;
@@ -120,6 +129,11 @@ namespace My2DGame
             Debug.Log($"CurrentHealth:{CurrentHealth}");
 
             isInvincible = true;
+            //무적 모드 효과 
+            if (invincibleMaterial != null)
+            {
+                renderer.material = invincibleMaterial;
+            }
 
             //애니메이션
             animator.SetTrigger(AnimationString.HitTrigger);
